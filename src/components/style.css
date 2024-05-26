@@ -1,3 +1,5 @@
+@import "pagination.css";
+
 .app-container {
   width: 95%;
   margin: 1rem auto;
