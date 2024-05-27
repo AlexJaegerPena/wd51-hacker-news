@@ -1,0 +1,5 @@
+.house-image {
+  width: 26rem;
+  object-fit: cover;
+  border-radius: 0.3rem;
+}

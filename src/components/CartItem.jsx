@@ -3,10 +3,12 @@ import axios from "axios";
 import "./style.css";
 import { FiSearch } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";
+import PageLoader from "./loader/PageSpinner";
 
 const CartItem = () => {
   const [items, setItems] = useState([]);
   const [searchItem, setSearchItem] = useState("");
+  const [loading, setLoading] = useState(false);
 
   // Handle search
   const handleChange = (e) => {
@@ -17,6 +19,13 @@ const CartItem = () => {
   const removeSearchInput = () => {
     setSearchItem("");
   };
+
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 5000);
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -55,28 +64,36 @@ const CartItem = () => {
         )}
       </form>
       <h2 className="title"> Authors </h2>
-      <div className="cart-item-wrapper">
-        {items &&
-          items
-            .filter((item) => {
-              return searchItem.toLocaleLowerCase().trim() === ""
-                ? item
-                : item.author.toLocaleLowerCase().startsWith(searchItem);
-            })
-            .map((data) => {
-              return (
-                <article key={data.objectID} className="cart-item">
-                  <h1> {data?.author} </h1>
-                  <h4> {data.story_title}</h4>
-                  <p> {data.comment_text?.substring(0, 200)}</p>
-                  <p> {data?._tags.map((e) => e)} </p>
-                  <p>
-                    Created At: <strong>{data?.created_at.slice(0, 10)}</strong>{" "}
-                  </p>
-                </article>
-              );
-            })}
-      </div>
+
+      {loading ? (
+        <div className="center">
+          <PageLoader />
+        </div>
+      ) : (
+        <div className="cart-item-wrapper">
+          {items &&
+            items
+              .filter((item) => {
+                return searchItem.toLocaleLowerCase().trim() === ""
+                  ? item
+                  : item.author.toLocaleLowerCase().startsWith(searchItem);
+              })
+              .map((data) => {
+                return (
+                  <article key={data.objectID} className="cart-item">
+                    <h1> {data?.author} </h1>
+                    <h4> {data.story_title}</h4>
+                    <p> {data.comment_text?.substring(0, 200)}</p>
+                    <p> {data?._tags.map((e) => e)} </p>
+                    <p>
+                      Created At:{" "}
+                      <strong>{data?.created_at.slice(0, 10)}</strong>{" "}
+                    </p>
+                  </article>
+                );
+              })}
+        </div>
+      )}
     </section>
   );
 };
