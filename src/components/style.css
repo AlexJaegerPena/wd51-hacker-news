@@ -21,6 +21,7 @@
   padding: 1rem;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   transition: all 2s;
+  overflow: hidden;
   &:hover {
     transform: scale(0.91);
   }
@@ -109,6 +110,11 @@
   font-size: 1.6rem;
   text-transform: uppercase;
   text-align: center;
-
   color: #008000;
+}
+
+.center {
+  text-align: center;
+  justify-content: center;
+  padding: 70px 0;
 }
