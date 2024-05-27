@@ -56,7 +56,7 @@ const SearchItem = ({ items, setItems, searchedItem, setSearchedItem }) => {
         onChange={handleSearchChange}
         className="input-field"
       />
-     
+
       <button className="search-item-btn">
         <FiSearch
           onClick={() => handleSearch(searchedItem)}

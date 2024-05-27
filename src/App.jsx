@@ -2,6 +2,7 @@ import CartItem from "./components/CartItem";
 import HouseCart from "./components/HouseCart";
 import "./components/style.css";
 import ClipLoader from "react-spinners/ClipLoader";
+import Spinner from "./components/Spinner";
 import { useEffect } from "react";
 import { useState } from "react";
 
@@ -15,13 +16,17 @@ const App = () => {
     }, 3000);
   }, []);
 
-  return loading ? (
-    <ClipLoader color={"green"} loading={loading} size={100} />
-  ) : (
+  return (
     <div className="app-container">
-      <HouseCart />
+      {loading ? (
+        <Spinner />
+      ) : (
+        <div>
+          <HouseCart />
 
-      <CartItem />
+          <CartItem />
+        </div>
+      )}
     </div>
   );
 };
